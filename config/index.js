@@ -6,7 +6,7 @@ module.exports = {
 		port: 8080,
 		autoOpenBrowser: false,
 		assetsSubDirectory: 'static',
-		assetsPublicPath: '/ocean/',
+		assetsPublicPath: '/matrix/',
 		cssSourceMap: false,
 		proxyTable: {},
 		errorOverlay: true,
@@ -21,6 +21,7 @@ module.exports = {
 	build: {
 		// Template for index.html
 		index: path.resolve(__dirname, '../dist/index.html'),
+		html: name => path.resolve(__dirname, `../dist/${name}.html`),
 		// Paths
 		assetsRoot: path.resolve(__dirname, '../dist'),
 		assetsSubDirectory: 'static',
@@ -29,6 +30,8 @@ module.exports = {
 		devtool: '#source-map',
 		productionGzip: false,
 		productionGzipExtensions: ['js', 'css'],
-		bundleAnalyzerReport: process.env.npm_config_report || process.argv[2] === 'report'
+		bundleAnalyzerReport: process.env.npm_config_report || process.argv[2] === 'report',
+		monitor: process.env.npm_config_monitor || process.argv[2] === 'monitor',
+		optimizeJs: true
 	}
 }

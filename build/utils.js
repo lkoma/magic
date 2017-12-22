@@ -21,13 +21,6 @@ exports.cssLoaders = (options = {}) => {
 		}
   	};
 
- 	// const postcssLoader = {
-	// 	loader: 'postcss-loader',
-	// 	options: {
-	// 		sourceMap: options.sourceMap
-	// 	}
-  	// };
-
   	// generate loader string to be used with extract text plugin
   	function generateLoaders(loader, loaderOptions) {
 		// const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader];
@@ -107,7 +100,6 @@ exports.getEntries = () => {
         moduleConfig = {};
     }
     glob.sync('src/*/module.json').forEach(file => {
-		console.log(file);
         const module = JSON.parse(fs.readFileSync(path.join(__dirname, '..', file)).toString());
         const { name, entry } = module;
         if (moduleConfig.includes && moduleConfig.includes.length) {
@@ -124,7 +116,7 @@ exports.getEntries = () => {
             path: file.replace('module.json', entry),
             data: module
         };
-    });
+	});
     return entries;
 };
 

@@ -9,24 +9,25 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WebpackMonitor = require('webpack-monitor');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+// const hash = require('../cache/deps.json').name.match(/deps\.([0-9a-f]+)\.js/)[1];
 
 const env = process.env.NODE_ENV === 'testing' ? require('../config/test.env') : require('../config/prod.env');
 
 const webpackConfig = merge(baseWebpackConfig, {
 	module: {
 		rules: utils.styleLoaders({
-			sourceMap: config.build.productionSourceMap,
-			extract: true,
-			usePostCSS: true
+			sourceMap: false,
+            extract: false
 		})
 	},
-  	devtool: 'inline-eval-cheap-source-map',// config.build.productionSourceMap ? config.build.devtool : false
+  	devtool: false,
 	output: {
 		path: config.build.assetsRoot,
-		filename: utils.assetsPath('js/[name].[chunkhash].js'),
-		chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+		filename: utils.assetsPath('js/[name].[chunkhash:16].js'),
+        chunkFilename: utils.assetsPath('js/[id].js')
 	},
   	plugins: [
     	// http://vuejs.github.io/vue-loader/en/workflow/production.html
@@ -44,11 +45,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         }),
     	// extract css into its own file
 		new ExtractTextPlugin({
-			filename: utils.assetsPath('css/[name].[contenthash].css'),
-			// set the following option to `true` if you want to extract CSS from
-			// codesplit chunks into this main css file as well.
-			// This will result in *all* of your app's CSS being loaded upfront.
-			allChunks: false,
+			filename: utils.assetsPath('css/[name].[contenthash].css')
 		}),
 		// Compress extracted CSS. We are using this plugin so that possible
 		// duplicated CSS from different components can be deduped.
@@ -57,66 +54,52 @@ const webpackConfig = merge(baseWebpackConfig, {
                 safe: true
             }
 		}),
-		// generate dist index.html with correct asset hash for caching.
-		// you can customize output by editing /index.html
-		// see https://github.com/ampedandwired/html-webpack-plugin
-		new HtmlWebpackPlugin({
-			filename: config.build.index,
-			template: 'index.html',
-			jsPath: '/matrix/',
-			inject: true,
-			title: 'oceanaly',
-			minify: {
-				removeComments: true,
-				collapseWhitespace: true,
-				removeAttributeQuotes: true
-				// more options:
-				// https://github.com/kangax/html-minifier#options-quick-reference
-			}
-		}),
-		// keep module.id stable when vender modules does not change
-		new webpack.HashedModuleIdsPlugin(),
-		// enable scope hoisting
-		new webpack.optimize.ModuleConcatenationPlugin(),
-		// split vendor js into its own file
 		new webpack.optimize.CommonsChunkPlugin({
-			name: 'vendor',
-			minChunks (module) {
-				// any required modules inside node_modules are extracted to vendor
-				return (
-				module.resource &&
-				/\.js$/.test(module.resource) &&
-				module.resource.indexOf(
-					path.join(__dirname, '../node_modules')
-				) === 0
-				)
-			}
+            name: ['common'],
+            minChunks: 2
 		}),
-		// extract webpack runtime and module manifest to its own file in order to
-		// prevent vendor hash from being updated whenever app bundle is updated
-		new webpack.optimize.CommonsChunkPlugin({
-			name: 'manifest',
-			minChunks: Infinity
-		}),
-		// This instance extracts shared chunks from code splitted chunks and bundles them
-		// in a separate chunk, similar to the vendor chunk
-		// see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
-		new webpack.optimize.CommonsChunkPlugin({
-			name: 'app',
-			async: 'vendor-async',
-			children: true,
-			minChunks: 3
-		}),
-
-    	// copy custom static assets
+		// copy custom static assets
 		new CopyWebpackPlugin([
 			{
 				from: path.resolve(__dirname, '../static'),
 				to: config.build.assetsSubDirectory,
 				ignore: ['.*']
 			}
-		])
+		]),
+		// keep module.id stable when vender modules does not change
+		new webpack.HashedModuleIdsPlugin(),
+		new webpack.optimize.OccurrenceOrderPlugin(true),
+        new webpack.optimize.AggressiveMergingPlugin(),
+        new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(zh-cn)$/),
+		// enable scope hoisting
+		new webpack.optimize.ModuleConcatenationPlugin()
   	]
+})
+Object.keys(utils.entries).forEach(name => {
+	webpackConfig.plugins.push(
+		new HtmlWebpackPlugin({
+			filename: process.env.NODE_ENV === 'testing' ? 'index.html' : config.build.html(name),
+			template: 'index.html',
+			jsPath: './static/js/',
+			inject: true,
+			// depsHash: hash,
+			chunks: ['common', name],
+			title: utils.entries[name].data.title || 'oceanaly',
+			minify: {
+				removeComments: true,
+				collapseWhitespace: true,
+				removeAttributeQuotes: true,
+				removeRedundantAttributes: true,
+				useShortDoctype: true,
+				removeEmptyAttributes: true,
+				removeStyleLinkTypeAttributes: true,
+				keepClosingSlash: true,
+				minifyJS: true,
+				minifyCSS: true,
+				minifyURLs: true
+			}
+		})
+	);
 })
 
 if (config.build.productionGzip) {
@@ -138,10 +121,24 @@ if (config.build.productionGzip) {
 }
 if (config.build.bundleAnalyzerReport) {
 	console.log(chalk.red('analyzering......'))
-	const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+	const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 	webpackConfig.plugins.push(new BundleAnalyzerPlugin({
 		analyzerMode: 'static'
 	}))
+}
+if (config.build.monitor) {
+    webpackConfig.plugins.push(new WebpackMonitor({
+        capture: true,
+        target: '../monitor/state.json',
+        launch: true,
+        port: 3030
+    }));
+}
+if (config.build.optimizeJs) {
+    const OptimizeJsPlugin = require('optimize-js-plugin');
+    webpackConfig.plugins.push(new OptimizeJsPlugin({
+        sourceMap: false
+    }));
 }
 
 module.exports = webpackConfig

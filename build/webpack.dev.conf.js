@@ -40,14 +40,22 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 		}),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
-		new webpack.NoEmitOnErrorsPlugin(),
-		// https://github.com/ampedandwired/html-webpack-plugin
-		new HtmlWebpackPlugin({
-			filename: 'index.html',
+		new webpack.NoEmitOnErrorsPlugin()
+	].concat(Object.keys(utils.entries).map(name =>
+		// generate dist index.html with correct asset hash for caching.
+		// you can customize output by editing /index.html
+		// see https://github.com/ampedandwired/html-webpack-plugin
+		(new HtmlWebpackPlugin({
+			filename: `${name}.html`,
 			template: 'index.html',
-			inject: true
-		}),
-	]
+			jsPath: '/oceanaly/',
+			inject: true,
+			chunks: [name],
+			// depsHash: hash,
+			hash: false,
+			title: utils.entries[name].data.title || 'medishare'
+		}))
+	))
 })
 
 module.exports = new Promise((resolve, reject) => {
