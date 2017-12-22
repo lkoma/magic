@@ -1,25 +1,29 @@
 // https://eslint.org/docs/user-guide/configuring
 
 module.exports = {
-  root: true,
-  parser: 'babel-eslint',
-  parserOptions: {
-    sourceType: 'module'
-  },
-  env: {
-    browser: true,
-  },
-  // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-  extends: 'standard',
-  // required to lint *.vue files
-  plugins: [
-    'html'
-  ],
-  // add your custom rules here
-  rules: {
-    // allow async-await
-    'generator-star-spacing': 'off',
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  }
+	"root": true,
+	"parser": "vue-eslint-parser",
+	"parserOptions": {
+		"parser": "babel-eslint",
+		"sourceType": "module",
+		"allowImportExportEverywhere": false
+	},
+	"env": {
+		"browser": true,
+	},
+	// https://github.com/standard/standard/blob/master/docs/RULES-en.md
+	"extends": ["airbnb-base"],
+	// required to lint *.vue files
+	"plugins": [
+		"vue"
+	],
+	// add your custom rules here
+	"rules": {
+		"space-before-function-paren": ["error", "never"],
+		"indent": ["error", 4, {
+			"SwitchCase": 1
+		}],
+		"semi": ["error", "always"],
+		"quotes": ["error", "single"]
+	}
 }
