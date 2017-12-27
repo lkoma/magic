@@ -15,13 +15,6 @@
     "plugins": [
         "transform-optional-chaining",
         "transform-decorators-legacy",
-        [
-            "import", 
-            {
-                "libraryName": "element-ui",
-                "styleLibraryName": "theme-default"
-            }
-        ],
         "transform-runtime"
     ],
     "comments": false,
@@ -31,9 +24,15 @@
             "plugins": [ "istanbul" ]
         },
         "node": {
-            "presets": [["env", {
-                "modules": "commonjs"
-            }], "stage-0"]
+            "presets": [
+                [
+                    "env",
+                    {
+                        "modules": "commonjs"
+                    }
+                ],
+                "stage-0"
+            ]
         }
     }
 }

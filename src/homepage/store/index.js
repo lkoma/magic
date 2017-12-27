@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import storeCache from 'common/utils/storeCache';
 import { name } from '../module.json';
 
 Vue.use(Vuex);
@@ -11,7 +10,6 @@ export default new Vuex.Store({
     modules: {
     },
     strict: debug,
-    plugins: [storeCache(sessionStorage, name)],
     mutations: {
     }
 });

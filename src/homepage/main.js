@@ -1,4 +1,4 @@
-import init from 'common/bootstrap';
+import init from 'common/main';
 import router from './router/index';
 // import store from './store/index';
 

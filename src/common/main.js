@@ -1,5 +1,9 @@
 import Vue from 'vue';
 import App from './App';
+import 'normalize.css';
+import demo from 'common/utils/demo';
+
+console.log(demo);
 export default function (props) {
     return new Vue({
         el: '#app',
@@ -9,7 +13,7 @@ export default function (props) {
         components: { App },
         ...props,
         mounted() {
-            log('App loaded, spend', +new Date() - window.appStartAt, 'ms');
+            console.log('App loaded, spend', +new Date() - window.appStartAt, 'ms');
         }
     });
 }
