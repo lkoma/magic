@@ -1,18 +1,26 @@
 const utils = require('./utils');
+const path = require('path');
 const webpack = require('webpack');
 const config = require('../config');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const portfinder = require('portfinder');
+
+function resolve(dir) {
+    return path.join(__dirname, '..', dir);
+}
 
 const HOST = process.env.HOST;
 const PORT = process.env.PORT && Number(process.env.PORT);
 
 const devWebpackConfig = merge(baseWebpackConfig, {
 	module: {
-		rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+		rules: utils.styleLoaders({ sourceMap: false })
 	},
 	// cheap-module-eval-source-map is faster for development
 	devtool: 'inline-eval-cheap-source-map',
@@ -38,9 +46,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 		new webpack.DefinePlugin({
 			'process.env': require('../config/dev.env')
 		}),
+		new webpack.NamedModulesPlugin(),
+		new CaseSensitivePathsPlugin(),
+		new WatchMissingNodeModulesPlugin(resolve('node_modules')),
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
-		new webpack.NoEmitOnErrorsPlugin()
+		new webpack.NoEmitOnErrorsPlugin(),
+		new FriendlyErrorsPlugin(),
+		new DashboardPlugin()
 	].concat(Object.keys(utils.entries).map(name =>
 		// generate dist index.html with correct asset hash for caching.
 		// you can customize output by editing /index.html

@@ -1,19 +1,39 @@
 {
-	"presets": [
-		[
-			"env", {
-				"modules": false,
-				"targets": {
-					"browser": ["> 2%"]
-				}
-			}
-		]
-	],
-	"plugins": ["transform-runtime"],
-	"env": {
-		"test": {
-			"presets": ["env"],
-			"plugins": ["transform-es2015-modules-commonjs", "dynamic-import-node"]
-		}
-	}
+    "presets": [
+        ["env", {
+            "modules": false,
+            "target": {
+                "browsers": [
+                    "Android >= 4",
+                    "iOS > 7",
+                    "> 5%"
+                ]
+            }
+        }],
+        "stage-0"
+    ],
+    "plugins": [
+        "transform-optional-chaining",
+        "transform-decorators-legacy",
+        [
+            "import", 
+            {
+                "libraryName": "element-ui",
+                "styleLibraryName": "theme-default"
+            }
+        ],
+        "transform-runtime"
+    ],
+    "comments": false,
+    "env": {
+        "test": {
+            "presets": ["env", "stage-0"],
+            "plugins": [ "istanbul" ]
+        },
+        "node": {
+            "presets": [["env", {
+                "modules": "commonjs"
+            }], "stage-0"]
+        }
+    }
 }

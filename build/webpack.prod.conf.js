@@ -103,8 +103,7 @@ Object.keys(utils.entries).forEach(name => {
 })
 
 if (config.build.productionGzip) {
-  	const CompressionWebpackPlugin = require('compression-webpack-plugin')
-
+  	const CompressionWebpackPlugin = require('compression-webpack-plugin');
 	webpackConfig.plugins.push(
 		new CompressionWebpackPlugin({
 			asset: '[path].gz[query]',
