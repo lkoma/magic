@@ -6,7 +6,7 @@ module.exports = {
 		port: 8080,
 		autoOpenBrowser: false,
 		assetsSubDirectory: 'static',
-		assetsPublicPath: '/matrix/',
+		assetsPublicPath: '/magic/',
 		cssSourceMap: false,
 		proxyTable: {},
 		errorOverlay: true,

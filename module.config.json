@@ -1,4 +1,4 @@
 {
-    "includes": ["homepage", "personalcenter"],
+    "includes": ["homepage"],
     "excludes": []
 }
