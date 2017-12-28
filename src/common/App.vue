@@ -36,4 +36,6 @@ html, body
         min-height 100%
         width 100%;
         position relative
+        font-size 14px
+        color #4a4a4a
 </style>
