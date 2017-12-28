@@ -1,9 +1,8 @@
 import Vue from 'vue';
 import App from './App';
 import 'normalize.css';
-import demo from 'common/utils/demo';
+import log from 'common/utils/log';
 
-console.log(demo);
 export default function (props) {
     return new Vue({
         el: '#app',
