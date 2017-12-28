@@ -60,12 +60,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 		(new HtmlWebpackPlugin({
 			filename: `${name}.html`,
 			template: 'index.html',
-			jsPath: '/oceanaly/',
+			jsPath: '/magic/',
 			inject: true,
 			chunks: [name],
 			// depsHash: hash,
 			hash: false,
-			title: utils.entries[name].data.title || 'medishare'
+			title: utils.entries[name].data.title || 'magic'
 		}))
 	))
 })

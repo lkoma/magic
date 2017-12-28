@@ -84,7 +84,7 @@ Object.keys(utils.entries).forEach(name => {
 			inject: true,
 			// depsHash: hash,
 			chunks: ['common', name],
-			title: utils.entries[name].data.title || 'oceanaly',
+			title: utils.entries[name].data.title || 'magic',
 			minify: {
 				removeComments: true,
 				collapseWhitespace: true,
