@@ -5,7 +5,7 @@ module.exports = {
 		env: require('./dev.env'),
 		host: '0.0.0.0',
 		port: 8080,
-		autoOpenBrowser: false,
+		autoOpenBrowser: true,
 		assetsSubDirectory: 'static',
 		assetsPublicPath: '/magic/',
 		cssSourceMap: false,

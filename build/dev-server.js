@@ -13,6 +13,7 @@ const upath = require('upath');
 const webpack = require('webpack');
 const chalk = require('chalk');
 const fs = require('fs');
+const opn = require('opn');
 const webpackConfig = process.env.NODE_ENV === 'testing'
     ? require('./webpack.prod.conf')
     : require('./webpack.dev.conf');
@@ -118,9 +119,9 @@ devMiddleware.waitUntilValid(() => {
         process.env.PORT = port;
         const uri = `http://localhost:${port}`;
         console.log(`> Listening at ${uri}\n`);
-        // if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
-        //     openBrowser(`${uri}/matrix/homepage.html`);
-        // }
+        if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
+            opn(`${uri}/magic/homepage.html#/`);
+        }
         server = app.listen(port);
         ['SIGINT', 'SIGTERM'].forEach(sig => {
             process.on(sig, () => {

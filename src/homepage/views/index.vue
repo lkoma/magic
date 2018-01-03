@@ -25,6 +25,16 @@ export default {
                 { image: 'http://static.ydcss.com/uploads/ydui/3.jpg' },
             ]
         }
+    },
+    created() {
+        this.getDate();
+    },
+    methods: {
+        getDate() {
+            this.$http.get('/api/list/').then(res => {
+                console.log(res);
+            });
+        }
     }
 };
 </script>
