@@ -30,17 +30,7 @@ const compiler = webpack(webpackConfig);
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
     publicPath: webpackConfig.output.publicPath,
-    quiet: true,
-    noInfo: true,
-    stats: {
-        chunks: false,
-        color: true
-    },
-    lazy: false,
-    watchOptions: {
-        poll: true,
-        aggregateTimeout: 400
-    }
+    quiet: true
 });
 
 const hotMiddleware = require('webpack-hot-middleware')(compiler, {
@@ -48,50 +38,6 @@ const hotMiddleware = require('webpack-hot-middleware')(compiler, {
     quite: true,
     noInfo: true
 });
-
-let apiList = [];
-const mockupPath = path.resolve(__dirname, '../mockup');
-function calcPath(dir) {
-    return fs.readdirSync(dir).reduce((list, file) => {
-        const name = path.join(dir, file);
-        const isDir = fs.statSync(name).isDirectory();
-        return list.concat(isDir ? calcPath(name) : [name.replace('.js', '')]);
-    }, []);
-}
-function readSource(file) {
-    const relativePath = `../mockup${file}.js`;
-    delete require.cache[require.resolve(relativePath)];
-    /* eslint-disable import/no-dynamic-require */
-    return require(relativePath);
-    /* eslint-enable */
-}
-function syncMockData() {
-    apiList = calcPath(mockupPath).map(file => upath.normalizeSafe(file.split(mockupPath).pop()));
-    console.log(chalk.green('Mock data updated.'));
-}
-fs.watch(mockupPath, syncMockData);
-syncMockData();
-
-app.use((request, response, next) => {
-    if (apiList.indexOf(request.path.replace(/\/$/, '')) >= 0) {
-        const data = JSON.stringify(readSource(request.path.replace(/\/$/, ''))(request, response));
-        console.info(chalk.yellow(`\n 😲  ==> ${request.url}`), chalk.green(' 🤗  <== 200'));
-        response.writeHead(200, { 'Content-Type': 'application/json;charset=utf-8' });
-        response.end(data);
-    }
-    else {
-        next();
-    }
-});
-
-// app.use((request, response, next) => {
-//     if (/deps\.[a-f0-9]+\.js/.test(request.path)) {
-//         response.end(fs.readFileSync(require('../cache/deps.json').name).toString());
-//     }
-//     else {
-//         next();
-//     }
-// });
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')());
