@@ -1,17 +1,21 @@
 .DS_Store
 node_modules/
-/dist/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-/test/unit/coverage/
-/test/e2e/reports/
-selenium-debug.log
+dist/
+npm-debug*
+test/unit/coverage
+mockup
 
-# Editor directories and files
 .idea
 .vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
+.sonar
+sonar_test
+yarn-error.log
+
+cache/*.js
+cache/*.json
+cache/*.info
+.cache
+document/_site
+module.config.json
+
+playground
