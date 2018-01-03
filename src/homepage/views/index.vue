@@ -10,7 +10,7 @@
                 <img :src="item.image">
             </yd-slider-item>
         </yd-slider>
-        <div>你好的</div>
+        <div>你哈</div>
         <yd-button size="large" type="primary">primary</yd-button>
    </div>
 </template>
