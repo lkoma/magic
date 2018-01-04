@@ -31,7 +31,12 @@ export default {
     },
     methods: {
         getDate() {
-            this.$http.get('/api/list/').then(res => {
+            this.$http.get('/api/list/', {
+                params: {
+                    name: '张三'
+                },
+                silence: true
+            }).then(res => {
                 console.log(res);
             });
         }
