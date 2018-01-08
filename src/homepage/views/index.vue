@@ -10,11 +10,13 @@
                 <img :src="item.image">
             </yd-slider-item>
         </yd-slider>
-        <div>你哈a a a</div>
+        <div>{{text}}</div>
         <yd-button size="large" type="primary">primary</yd-button>
    </div>
 </template>
 <script>
+
+import tail from 'lodash/tail';
 
 export default {
     data() {
@@ -23,11 +25,13 @@ export default {
                 { image: 'http://static.ydcss.com/uploads/ydui/1.jpg' },
                 { image: 'http://static.ydcss.com/uploads/ydui/2.jpg' },
                 { image: 'http://static.ydcss.com/uploads/ydui/3.jpg' },
-            ]
+            ],
+            text: '你好'
         }
     },
     created() {
         this.getDate();
+        console.log(tail([1, 2]));
     },
     methods: {
         getDate() {

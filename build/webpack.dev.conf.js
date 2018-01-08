@@ -10,6 +10,7 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const portfinder = require('portfinder');
+const hash = require('../cache/deps.json').name.match(/deps\.([0-9a-f]+)\.js/)[1];
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(name => {
@@ -28,6 +29,10 @@ module.exports = merge(baseWebpackConfig, {
 {
 	devtool: 'inline-eval-cheap-source-map',
 	plugins: [
+		new webpack.DllReferencePlugin({
+            context: path.join(__dirname, '..', 'cache'),
+			manifest: require("../cache/manifest.json") // eslint-disable-line
+        }),
 		new webpack.DefinePlugin({
 			'process.env': config.dev.env
 		}),
@@ -48,7 +53,7 @@ module.exports = merge(baseWebpackConfig, {
 			jsPath: '/magic/',
 			inject: true,
 			chunks: [name],
-			// depsHash: hash,
+			depsHash: hash,
 			hash: false,
 			title: utils.entries[name].data.title || 'magic'
 		}))

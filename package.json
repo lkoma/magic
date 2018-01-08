@@ -8,7 +8,7 @@
     "dev": "node build/dev-server.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "build": "node build/build.js",
+    "build": "node build/makeDll.js && node build/build.js",
     "analyzer": "node build/build.js report"
   },
   "dependencies": {
@@ -57,11 +57,13 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "glob": "^7.1.2",
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.0.3",
     "jest-serializer-vue": "^0.3.0",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
+    "md5": "^2.2.1",
     "mockjs": "^1.0.1-beta3",
     "nightwatch": "^0.9.12",
     "node-notifier": "^5.1.2",

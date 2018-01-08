@@ -83,6 +83,14 @@ app.use((request, response, next) => {
         next();
     }
 });
+app.use((request, response, next) => {
+    if (/deps\.[a-f0-9]+\.js/.test(request.path)) {
+        response.end(fs.readFileSync(require('../cache/deps.json').name).toString());
+    }
+    else {
+        next();
+    }
+});
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')());
 

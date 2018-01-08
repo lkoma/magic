@@ -8,7 +8,6 @@ axios.interceptors.request.use((config = {}) => {
 }, error => Promise.reject(error));
 
 axios.interceptors.response.use(res => {
-    console.log(res.config.silence);
     if (res.config.silence) {
         return res.data;
     }

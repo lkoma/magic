@@ -12,7 +12,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackMonitor = require('webpack-monitor');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
-// const hash = require('../cache/deps.json').name.match(/deps\.([0-9a-f]+)\.js/)[1];
+const hash = require('../cache/deps.json').name.match(/deps\.([0-9a-f]+)\.js/)[1];
 
 const env = process.env.NODE_ENV === 'testing' ? require('../config/test.env') : require('../config/prod.env');
 
@@ -30,7 +30,9 @@ const webpackConfig = merge(baseWebpackConfig, {
         chunkFilename: utils.assetsPath('js/[id].js')
 	},
   	plugins: [
-    	// http://vuejs.github.io/vue-loader/en/workflow/production.html
+    	new webpack.DllReferencePlugin({
+            manifest: require('../cache/manifest.json')
+        }),
 		new webpack.DefinePlugin({
 			'process.env': env
 		}),
@@ -82,7 +84,7 @@ Object.keys(utils.entries).forEach(name => {
 			template: 'index.html',
 			jsPath: './static/js/',
 			inject: true,
-			// depsHash: hash,
+			depsHash: hash,
 			chunks: ['common', name],
 			title: utils.entries[name].data.title || 'magic',
 			minify: {
