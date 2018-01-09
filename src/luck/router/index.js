@@ -5,11 +5,11 @@ import luck from 'luck/views/luck';
 Vue.use(Router);
 
 export default new Router({
-	routes: [
-		{
-			path: '/luck',
-			name: 'luck',
-			component: luck
-		}
-	]
-})
+    routes: [
+        {
+            path: '/luck',
+            name: 'luck',
+            component: luck
+        }
+    ]
+});

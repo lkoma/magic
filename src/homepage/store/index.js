@@ -10,6 +10,7 @@ export default new Vuex.Store({
     modules: {
     },
     strict: debug,
+    plugins: [storeCache(sessionStorage, name)],
     mutations: {
     }
 });

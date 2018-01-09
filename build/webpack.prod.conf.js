@@ -76,7 +76,7 @@ const webpackConfig = merge(baseWebpackConfig, {
 		// enable scope hoisting
 		new webpack.optimize.ModuleConcatenationPlugin()
   	]
-})
+});
 Object.keys(utils.entries).forEach(name => {
 	webpackConfig.plugins.push(
 		new HtmlWebpackPlugin({
@@ -102,7 +102,7 @@ Object.keys(utils.entries).forEach(name => {
 			}
 		})
 	);
-})
+});
 
 if (config.build.productionGzip) {
   	const CompressionWebpackPlugin = require('compression-webpack-plugin');
@@ -142,4 +142,4 @@ if (config.build.optimizeJs) {
     }));
 }
 
-module.exports = webpackConfig
+module.exports = webpackConfig;

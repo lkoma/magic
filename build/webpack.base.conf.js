@@ -4,7 +4,7 @@ const config = require('../config');
 const vueLoaderConfig = require('./vue-loader.conf');
 
 function resolve (dir) {
-	return path.join(__dirname, '..', dir)
+	return path.join(__dirname, '..', dir);
 }
 const imagePath = process.env.DOCUMENT ? undefined : '/magic/';
 const createLintingRule = () => ({
@@ -17,7 +17,7 @@ const createLintingRule = () => ({
 		emitWarning: !config.dev.showEslintErrorsInOverlay,
 		quiet: true
 	}
-})
+});
 
 module.exports = {
 	cache: true,
@@ -103,4 +103,4 @@ module.exports = {
 	performance: {
         hints: false
     }
-}
+};

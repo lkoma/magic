@@ -25,4 +25,4 @@ export default function (props) {
             console.log('App loaded, spend', +new Date() - window.appStartAt, 'ms');
         }
     });
-}
+};
