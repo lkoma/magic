@@ -1,11 +1,11 @@
 import Vue from 'vue';
-import http from './utils/http';
-import App from './App';
 import 'normalize.css';
 import YDUI from 'vue-ydui';
 import 'vue-ydui/dist/ydui.px.css';
-import log from 'common/utils/log';
 import 'common/assets/css/ydui.styl';
+import App from './App';
+import './utils/log';
+import http from './utils/http';
 
 Vue.config.silent = true;
 Vue.config.productionTip = false;
@@ -25,4 +25,4 @@ export default function (props) {
             console.log('App loaded, spend', +new Date() - window.appStartAt, 'ms');
         }
     });
-};
+}

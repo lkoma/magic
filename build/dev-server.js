@@ -49,6 +49,7 @@ const hotMiddleware = require('webpack-hot-middleware')(compiler, {
     quite: true,
     noInfo: true
 });
+
 let apiList = [];
 const mockupPath = path.resolve(__dirname, '../mockup');
 function calcPath(dir) {

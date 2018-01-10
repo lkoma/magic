@@ -24,10 +24,10 @@ export default {
             bannerList: [
                 { image: 'http://static.ydcss.com/uploads/ydui/1.jpg' },
                 { image: 'http://static.ydcss.com/uploads/ydui/2.jpg' },
-                { image: 'http://static.ydcss.com/uploads/ydui/3.jpg' },
+                { image: 'http://static.ydcss.com/uploads/ydui/3.jpg' }
             ],
             text: '你好'
-        }
+        };
     },
     created() {
         this.getDate();

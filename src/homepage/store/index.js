@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { name } from '../module.json';
+import storeCache from 'common/utils/storeCache';
 
 Vue.use(Vuex);
 
