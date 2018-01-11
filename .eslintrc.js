@@ -1,6 +1,6 @@
 module.exports = {
     "root": true,
-    "parser": "babel-eslint",
+    "parser": "vue-eslint-parser",
     "parserOptions": {
         "parser": "babel-eslint",
         "sourceType": "module",
@@ -11,7 +11,7 @@ module.exports = {
     },
     "extends": ["airbnb-base"],
     "plugins": [
-        "html"
+        "vue"
     ],
     "settings": {
         "import/resolver": {
@@ -25,9 +25,7 @@ module.exports = {
             "js": "never",
             "vue": "never"
         }],
-        "import/no-extraneous-dependencies": ["error", {
-            "optionalDependencies": ["test/unit/index.js"]
-        }],
+        "import/no-extraneous-dependencies": 0,
         "max-len": [1, {
             "code": 120,
             "ignoreUrls": true,
