@@ -12,7 +12,7 @@
     "analyzer": "node build/build.js report"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+	"axios": "^0.17.1",
     "better-scroll": "^1.6.3",
     "easy-enum.js": "^1.1.4",
     "lodash": "^4.17.4",

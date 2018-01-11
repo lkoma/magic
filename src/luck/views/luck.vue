@@ -29,30 +29,30 @@ export default {
     data() {
         return {
             list: [
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s1.jpg'},
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s2.jpg'},
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s3.jpg'},
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s4.jpg'},
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s5.jpg'},
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s6.jpg'}
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s1.jpg' },
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s2.jpg' },
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s3.jpg' },
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s4.jpg' },
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s5.jpg' },
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s6.jpg' }
             ],
             demoList: [
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s1.jpg'},
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s2.jpg'},
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s3.jpg'},
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s4.jpg'},
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s5.jpg'},
-                {src: 'http://static.ydcss.com/uploads/lightbox/meizu_s6.jpg'}
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s1.jpg' },
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s2.jpg' },
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s3.jpg' },
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s4.jpg' },
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s5.jpg' },
+                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s6.jpg' }
             ],
             scroll: null
         };
     },
     mounted() {
-        new BScroll('.out-wrap',{
+        new BScroll('.out-wrap', {
             scrollX: true,
             click: true
         });
-        this.scroll = new BScroll('.page-wrap',{
+        this.scroll = new BScroll('.page-wrap', {
             scrollY: true,
             click: true,
             pullUpLoad: {
@@ -60,14 +60,14 @@ export default {
                 moreTxt: 'Load more',
                 noMoreTxt: 'There is no more data'
             }
-        })
+        });
     },
     methods: {
         scrollPosition() {
             this.scroll.scrollToElement(
                 '.test',
                 500,
-                0
+                0,
                 -70
             );
         }

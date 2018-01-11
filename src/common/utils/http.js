@@ -3,9 +3,7 @@ import axios from 'axios';
 window.axios = axios;
 axios.defaults.timeout = 30000;
 
-axios.interceptors.request.use((config = {}) => {
-    return config;
-}, error => Promise.reject(error));
+axios.interceptors.request.use((config = {}) => config, error => Promise.reject(error));
 
 axios.interceptors.response.use(res => {
     if (res.config.silence) {

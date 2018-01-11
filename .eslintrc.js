@@ -35,6 +35,7 @@ module.exports = {
             "ignoreTemplateLiterals": true,
             "ignoreRegExpLiterals": true
         }],
+        "no-new": 0,
         "no-debugger": 2,
         "comma-dangle": ["error", "never"],
         "indent": ["error", 4, {
