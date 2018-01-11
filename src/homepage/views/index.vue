@@ -17,6 +17,7 @@
 <script>
 
 import tail from 'lodash/tail';
+import config from 'homepage/config';
 
 export default {
     data() {
@@ -35,7 +36,7 @@ export default {
     },
     methods: {
         getDate() {
-            this.$http.get('/api/list/', {
+            this.$http.get(config.apis.testList, {
                 params: {
                     name: '张三'
                 },
