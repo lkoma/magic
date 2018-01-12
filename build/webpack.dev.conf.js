@@ -7,6 +7,7 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const hash = require('../cache/deps.json').name.match(/deps\.([0-9a-f]+)\.js/)[1];
@@ -31,7 +32,7 @@ module.exports = merge(
         plugins: [
             new webpack.DllReferencePlugin({
                 context: path.join(__dirname, '..', 'cache'),
-			manifest: require("../cache/manifest.json") // eslint-disable-line
+			    manifest: require("../cache/manifest.json") // eslint-disable-line
             }),
             new webpack.DefinePlugin({
                 'process.env': config.dev.env
@@ -42,7 +43,8 @@ module.exports = merge(
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
             new FriendlyErrorsPlugin(),
-            new DashboardPlugin()
+            new DashboardPlugin(),
+            new FaviconsWebpackPlugin('./src/common/assets/img/favicon.ico')
         ].concat(Object.keys(utils.entries).map(name =>
         // generate dist index.html with correct asset hash for caching.
         // you can customize output by editing /index.html
