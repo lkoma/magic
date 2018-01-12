@@ -1,13 +1,16 @@
 <template>
    <div class="page-wrap">
        <div class="main-wrap">
-            <h4 @click="scrollPosition" class="photo">相册</h4>
+            <h4 @click="scrollPosition" class="photo" v-clamp="2">
+                {{date | fromNow}}
+                上课大富科技速度快哈利的撒是否发士大夫反倒是富士达电风扇发的啊打发大夫反倒是富士达电风扇发的啊打
+            </h4>
             <div class="out-wrap">
                 <yd-lightbox
                     class="list-wrap"
                     :style="{'width': list.length * 158 + 'px'}">
                     <yd-lightbox-img
-                        v-for="item, key in list"
+                        v-for="item, key in list.list"
                         :key="key"
                         :src="item.src"
                         class="item-wrap">
@@ -16,7 +19,7 @@
             </div>
             <div class="test">
                 <yd-lightbox>
-                    <yd-lightbox-img v-for="item, key in demoList" :key="key" :src="item.src"></yd-lightbox-img>
+                    <yd-lightbox-img v-for="item, key in list.imgs" :key="key" :src="item.src"></yd-lightbox-img>
                 </yd-lightbox>
             </div>
         </div>
@@ -24,26 +27,13 @@
 </template>
 <script>
 import BScroll from 'better-scroll';
+import config from 'luck/config';
 
 export default {
     data() {
         return {
-            list: [
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s1.jpg' },
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s2.jpg' },
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s3.jpg' },
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s4.jpg' },
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s5.jpg' },
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s6.jpg' }
-            ],
-            demoList: [
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s1.jpg' },
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s2.jpg' },
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s3.jpg' },
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s4.jpg' },
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s5.jpg' },
-                { src: 'http://static.ydcss.com/uploads/lightbox/meizu_s6.jpg' }
-            ],
+            list: [],
+            date: new Date('2018-01-09').getTime(),
             scroll: null
         };
     },
@@ -62,6 +52,9 @@ export default {
             }
         });
     },
+    created() {
+        this.getData();
+    },
     methods: {
         scrollPosition() {
             this.scroll.scrollToElement(
@@ -70,13 +63,20 @@ export default {
                 0,
                 -70
             );
+        },
+        getData() {
+            this.$http.get(config.apis.swiperList).then(res => {
+                this.list = res;
+            });
         }
     }
 };
 </script>
 <style lang="stylus" scoped>
 .photo
-    height 100px
+    height 48px
+    color red
+    font-size 20px
     background-color lightseagreen
 .out-wrap
     width 100%

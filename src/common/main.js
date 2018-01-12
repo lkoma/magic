@@ -5,6 +5,8 @@ import 'vue-ydui/dist/ydui.px.css';
 import 'common/assets/css/ydui.styl';
 import App from './App';
 import './utils/log';
+import './filters/index';
+import './directives/index';
 import http from './utils/http';
 
 Vue.config.silent = true;
