@@ -1,4 +1,4 @@
-# demo
+# magic
 
 > A Vue.js project
 
