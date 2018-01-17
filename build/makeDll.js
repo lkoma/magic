@@ -13,7 +13,7 @@ const newMd5 = md5(sh.cat('./package.json', './build/webpack.dll.conf.js', './.b
 if (sh.test('-f', './cache/md5.info')
     && sh.test('-f', './cache/manifest.json')
     && sh.test('-f', './cache/deps.json')) {
-    oldMd5 = sh.cat('./cache/md5.info').toString();
+    oldMd5 = sh.cat('./cache/md5.info').toString().replace(/[\r\n]/g, '');
 }
 
 if (newMd5 !== oldMd5) {

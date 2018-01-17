@@ -11,9 +11,9 @@ const baseConfig = Object.assign({}, require('./webpack.base.conf'));
 
 baseConfig.entry = {
     deps: [
-        'vue', 'vue-router', 'vue-ydui', 'axios',
-        'normalize.css', 'animate.css',
-        'vuex', 'vue-ydui/dist/ydui.px.css',
+        'vue', 'vue-router', 'muse-ui', 'axios',
+        'normalize.css', 'animate.css', 'detector',
+        'vuex', 'muse-ui/dist/muse-ui.css', 'muse-ui/dist/theme-teal.css',
         'moment', 'enum'
     ]
 };
