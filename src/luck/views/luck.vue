@@ -1,6 +1,17 @@
 <template>
    <div class="page-wrap">
        <div class="main-wrap">
+            <mu-appbar title="migic">
+                <mu-icon-button icon="navigate_before" slot="left" class="back"/>
+                <mu-icon-menu icon="more_vert" slot="right">
+                    <mu-menu-item title="菜单 1"/>
+                    <mu-menu-item title="菜单 2"/>
+                    <mu-menu-item title="菜单 3"/>
+                    <mu-menu-item title="菜单 4"/>
+                    <mu-menu-item title="菜单 5"/>
+                </mu-icon-menu>
+            </mu-appbar>
+            <mu-raised-button label="跳转" class="demo-raised-button" primary @click="go"/>
             <h4 @click="scrollPosition" class="photo" v-clamp="2">
                 {{date | fromNow}}
                 上课大富科技速度快哈利的撒是否发士大夫反倒是富士达电风扇发的啊打发大夫反倒是富士达电风扇发的啊打
@@ -28,6 +39,7 @@
 <script>
 import BScroll from 'better-scroll';
 import config from 'luck/config';
+import bridge from 'common/bridge';
 
 export default {
     data() {
@@ -68,11 +80,16 @@ export default {
             this.$http.get(config.apis.swiperList).then(res => {
                 this.list = res;
             });
+        },
+        go() {
+            bridge.openNewPage('router://hybridWebView?url=/magic/homepage.html#/');
         }
     }
 };
 </script>
 <style lang="stylus" scoped>
+.back
+    font-size 20px
 .photo
     height 48px
     color red

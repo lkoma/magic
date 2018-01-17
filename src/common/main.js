@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import 'normalize.css';
-import YDUI from 'vue-ydui';
-import 'vue-ydui/dist/ydui.px.css';
+import MuseUI from 'muse-ui';
+import 'muse-ui/dist/muse-ui.css';
+import 'muse-ui/dist/theme-teal.css';
 import 'common/assets/css/ydui.styl';
 import App from './App';
 import './utils/log';
@@ -14,7 +15,7 @@ Vue.config.productionTip = false;
 Vue.config.devtools = true;
 Vue.config.performance = true;
 
-Vue.use(YDUI);
+Vue.use(MuseUI);
 Vue.prototype.$http = http;
 
 export default function (props) {

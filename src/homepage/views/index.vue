@@ -11,13 +11,14 @@
             </yd-slider-item>
         </yd-slider>
         <div>{{text}}</div>
-        <yd-button size="large" type="primary">primary</yd-button>
+        <mu-raised-button label="返回" class="demo-raised-button" primary @click="back"/>
    </div>
 </template>
 <script>
 
 import tail from 'lodash/tail';
 import config from 'homepage/config';
+import bridge from 'common/bridge';
 
 export default {
     data() {
@@ -44,6 +45,9 @@ export default {
             }).then(res => {
                 console.log(res);
             });
+        },
+        back() {
+            bridge.back();
         }
     }
 };
