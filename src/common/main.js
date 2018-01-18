@@ -9,6 +9,8 @@ import './filters/index';
 import './directives/index';
 import http from './utils/http';
 
+require('smoothscroll-polyfill').polyfill();
+
 Vue.config.silent = true;
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
