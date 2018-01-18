@@ -23,7 +23,6 @@ process.on('unhandledRejection', err => {
     throw err;
 });
 
-// automatically open browser, if not set will be false
 const autoOpenBrowser = !!config.dev.autoOpenBrowser;
 
 const app = express();
@@ -66,6 +65,8 @@ function readSource(file) {
     return require(relativePath);
     /* eslint-enable */
 }
+
+/* eslint-disable no-console */
 function syncMockData() {
     apiList = calcPath(mockupPath).map(file => upath.normalizeSafe(file.split(mockupPath).pop()));
     console.log(chalk.green('Mock data updated.'));

@@ -15,6 +15,7 @@ const hash = require('../cache/deps.json').name.match(/deps\.([0-9a-f]+)\.js/)[1
 
 const env = require('../config/prod.env');
 
+/* eslint-disable no-console */
 const webpackConfig = merge(baseWebpackConfig, {
     module: {
         rules: utils.styleLoaders({

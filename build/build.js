@@ -11,6 +11,7 @@ const webpack = require('webpack');
 const config = require('../config');
 const webpackConfig = require('./webpack.prod.conf');
 
+/* eslint-disable no-console */
 const spinner = ora('building for production...');
 spinner.start();
 

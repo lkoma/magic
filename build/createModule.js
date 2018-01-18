@@ -58,6 +58,7 @@ export default config;
 `
 };
 
+/* eslint-disable no-console */
 console.log(chalk.yellow(`Creating new module: ${name}`));
 const modulePath = `src/${name}`;
 const dirmap = ['assets', 'components', 'router', 'store', 'views'].reduce((map, folder) => {

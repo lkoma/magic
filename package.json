@@ -8,9 +8,9 @@
 		"dev": "node build/makeDll.js && node build/dev-server.js",
 		"develop": "node build/makeDll.js && node build/dev-server.js",
 		"start": "npm run dev",
-		"lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
+		"lint": "eslint --ext .js,.vue src config build",
+		"lint-fix": "eslint --ext .js,.vue src config build --fix",
 		"build": "node build/makeDll.js && node build/build.js",
-		"analyzer": "node build/build.js report",
 		"add": "node build/createModule.js"
 	},
 	"dependencies": {
