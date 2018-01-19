@@ -16,6 +16,7 @@
                 {{date | fromNow}}
                 上课大富科技速度快哈利的撒是否发士大夫反倒是富士达电风扇发的啊打发大夫反倒是富士达电风扇发的啊打
             </h4>
+            <div class="test"></div>
             <div class="out-wrap">
                 <yd-lightbox
                     class="list-wrap"
@@ -95,6 +96,8 @@ export default {
     color red
     font-size 20px
     background-color lightseagreen
+.test
+    size 100px
 .out-wrap
     width 100%
     height 150px
