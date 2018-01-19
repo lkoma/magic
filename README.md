@@ -1,6 +1,6 @@
 # magic
 
-> A Vue.js project architecture
+> A Vue+Webpack project architecture
 
 ## Init
 
