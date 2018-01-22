@@ -3,6 +3,8 @@ import 'normalize.css';
 import MuseUI from 'muse-ui';
 import 'muse-ui/dist/muse-ui.css';
 import 'muse-ui/dist/theme-teal.css';
+import 'common/assets/css/muse-ui.styl';
+import 'common/assets/css/base.styl';
 import App from './App';
 import './utils/log';
 import './filters/index';
