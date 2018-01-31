@@ -10,6 +10,7 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
 const FaviconsPlugin = require('favicons-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+const Jarvis = require('webpack-jarvis');
 const hash = require('../cache/deps.json').name.match(/deps\.([0-9a-f]+)\.js/)[1];
 
 // add hot-reload related code to entry chunks
@@ -21,7 +22,7 @@ function resolve(dir) {
     return path.join(__dirname, '..', dir);
 }
 
-module.exports = merge(
+const webpackConfig = merge(
     baseWebpackConfig, {
         module: {
             rules: utils.styleLoaders({ sourceMap: false })
@@ -61,3 +62,11 @@ module.exports = merge(
             }))))
     }
 );
+if (process.argv[2] === 'jarvis') {
+    webpackConfig.plugins.push(
+        new Jarvis({
+            port: 1337 // optional: set a port
+        })
+    );
+}
+module.exports = webpackConfig;

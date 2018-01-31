@@ -19,6 +19,8 @@ yarn run dev
 yarn run develop
 # or 
 yarn run start
+# build for production and view the bundle analyzer report
+yarn run dev jarvis
 ```
 
 ## Lint
