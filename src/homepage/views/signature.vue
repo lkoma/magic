@@ -8,7 +8,6 @@
         <mu-popup position="top" :overlay="true" popupClass="demo-popup-top" :open="show" @close="close">
              <mu-content-block>
                 <vueSignature ref="signature" :sigOption="option" :w="'400px'" :h="'400px'"></vueSignature>
-                <vueSignature ref="signature1" :sigOption="option"></vueSignature>
                 <mu-raised-button label="保存" primary @click="save"/>
                 <mu-raised-button label="清除" primary @click="clear"/>
             </mu-content-block>
