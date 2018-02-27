@@ -1,28 +1,22 @@
 <template>
-    <div>
-        <mu-appbar title="签名2"></mu-appbar>
-        <div class="sign">
-            <canvas ref="canvas" class="canvas"></canvas>
-        </div>
-        <mu-raised-button label="保存" class="demo-raised-button" @click="save" primary/>
-        <mu-raised-button label="清除" class="demo-raised-button" @click="clear" primary/>
-        <div>
-            <img :src="image" alt="" class="image">
-        </div>
-        <div>
-            <canvas ref="cvs" class="cvs"></canvas>
-            <mu-raised-button label="保存" class="demo-raised-button" @click="sav" primary/>
-            <mu-raised-button label="清除" class="demo-raised-button" @click="empty" primary/>
-        </div>
-        <div>
-            <img :src="png" alt="" class="image">
+    <div class="signatrue">
+        <div class="wrap">
+            <mu-appbar title="签名2"></mu-appbar>
+            <div class="sign">
+                <canvas ref="canvas" class="canvas"></canvas>
+                <div class="operation">
+                    <mu-raised-button label="保存" class="demo-raised-button" @click="save" primary/>
+                    <mu-raised-button label="清除" class="demo-raised-button" @click="clear" primary/>
+                </div>
+            </div>
+            <div>
+                <img :src="image" alt="" class="image">
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import SignaturePad from 'signature_pad';
-
 let draw;
 class Draw {
     constructor(canvas) {
@@ -113,15 +107,12 @@ class Draw {
 export default {
     data() {
         return {
-            image: '',
-            signaturePad: '',
-            png: ''
+            image: ''
         };
     },
     mounted() {
         draw = new Draw(this.$refs.canvas);
         draw.init();
-        this.signaturePad = new SignaturePad(this.$refs.cvs);
     },
     methods: {
         save() {
@@ -129,25 +120,30 @@ export default {
         },
         clear() {
             draw.clear();
-        },
-        sav() {
-            this.png = this.signaturePad.toDataURL();
-            console.log(this.signaturePad.toDataURL());
-        },
-        empty() {
-            this.signaturePad.clear();
         }
     }
 };
 </script>
 <style lang="stylus" scoped>
 .sign
-    size 200px 150px
-.canvas
-    size 100%
-    background-color #ccc
+    width 100%
+    position relative
+    .canvas
+        size 100%
+        background-color #ccc
+    .operation
+        position absolute
+        left 0
+        top 0
+        z-index 999
 .image
-    size 100%
-.cvs
-    background-color #ccc
+    size 50%
+.wrap
+    height 100%
+    overflow auto
+@media screen and (orientation: portrait)
+        .signatrue
+            transform rotate(-90deg)
+            size 100vh
+            overflow: hidden
 </style>

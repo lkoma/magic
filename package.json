@@ -25,6 +25,7 @@
 		"moment": "^2.20.1",
 		"muse-ui": "^2.1.0",
 		"normalize.css": "^7.0.0",
+		"signature_pad": "^2.3.2",
 		"smoothscroll-polyfill": "^0.4.0",
 		"vue": "^2.5.2",
 		"vue-router": "^3.0.1",
